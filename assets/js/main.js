@@ -127,8 +127,8 @@ function likes (DOMsection, index) {
     //apply addEventListener so i can click on the button 
     button.addEventListener('click', function(){
 
-        //add toggle to button so i can change the button color
-        button.style.color = "#0CD977";
+        
+        
 
         //add a variable to compare the actual number of likes to the one that i register after the click
         const clickedLikes = posts[index].likes;
