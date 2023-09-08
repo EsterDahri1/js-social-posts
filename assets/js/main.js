@@ -103,7 +103,7 @@ function postMarkup (obj){
         <div class="post__footer">
             <div class="likes js-likes">
                 <div class="likes__cta">
-                    <a class="like-button  js-like-button" href="#" data-postid="${obj.id}">
+                    <a class="like-button  js-like-button" href="##" data-postid="${obj.id}">
                         <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                         <span class="like-button__label">Mi Piace</span>
                     </a>
@@ -122,13 +122,34 @@ function postMarkup (obj){
 function likes (DOMsection, index) {
     //take from the DOM the buttons and the counter of likes
     const button = DOMsection.querySelector('a');
-    const numberLikes = DOMsection.querySelector('.likes_counter b');
+    const numberLikes = DOMsection.getElementById('like-counter-1');
 
     //apply addEventListener so i can click on the button 
-    button.addEventListener('click', function (){
+    button.addEventListener('click', function(){
 
-        //add toggle to button so i can put or remove the click
-        button.classList.toggle('like-button--liked');
-        
+        //add toggle to button so i can change the button color
+        button.style.color = "#0CD977";
+
+        //add a variable to compare the actual number of likes to the one that i register after the click
+        const clickedLikes = posts[index].likes;
+
+        //put the id on a variable
+        const postId = posts[index].id;
+
+        //if numberLikes == clickedLikes
+        if(numberLikes.textContent == clickedLikes){
+            //add 1 to number of likes
+            numberLikes.innerHTML = Number(numberLikes.textContent) + 1;
+            //push into an array 
+            likedPost.push(postId);
+        }else {
+            //remove 1 to number of likes
+            numberLikes.innerHTML = Number(numberLikes.textContent) - 1;
+            //remove like from array
+            const deleteLike = likedPost.filter(like => like != postId);
+            //refresh array
+            likedPost = deleteLike;
+        };
+        console.log(likedPost);
     })
 }
