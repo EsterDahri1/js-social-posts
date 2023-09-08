@@ -117,4 +117,18 @@ function postMarkup (obj){
 
     return postMarkup;
 
+};
+
+function likes (DOMsection, index) {
+    //take from the DOM the buttons and the counter of likes
+    const button = DOMsection.querySelector('a');
+    const numberLikes = DOMsection.querySelector('.likes_counter b');
+
+    //apply addEventListener so i can click on the button 
+    button.addEventListener('click', function (){
+
+        //add toggle to button so i can put or remove the click
+        button.classList.toggle('like-button--liked');
+        
+    })
 }
