@@ -55,3 +55,66 @@ const posts = [
         "created": "2021-03-05"
     }
 ];
+
+/*Milestone 1
+Creiamo il nostro array di oggetti che rappresentano ciascun post.
+Ogni post dovrà avere le informazioni necessarie per stampare la relativa card:
+id del post, numero progressivo da 1 a n
+nome autore,
+foto autore,
+data in formato americano (mm-gg-yyyy),
+testo del post,
+immagine (non tutti i post devono avere una immagine),
+numero di likes.
+Non è necessario creare date casuali
+Per le immagini va bene utilizzare qualsiasi servizio di placeholder ad es. Unsplash (https://unsplash.it/300/300?image=<id>)
+Milestone 2
+Prendendo come riferimento il layout di esempio presente nell'html, stampiamo i post del nostro feed.*/
+
+//transform the div#container in a variable so I can use it in the js file
+const containerEl = document.getElementById('container');
+
+posts.forEach((post) =>{
+    //print posts on feed
+    containerEl.insertAdjacentHTML('beforeend', postMarkup(post));
+
+});
+
+function postMarkup (obj){
+
+    //copy the markup given in the strater kit and put it in a variable smthMarkup
+    const postMarkup = `
+    <div class="post">
+        <div class="post__header">
+            <div class="post-meta">                    
+                <div class="post-meta__icon">
+                    <img class="profile-pic" src="${obj.media}" alt="${obj.author}">                    
+                </div>
+                <div class="post-meta__data">
+                    <div class="post-meta__author">${obj.author.name}</div>
+                    <div class="post-meta__time">${obj.created}</div>
+                </div>                    
+            </div>
+        </div>
+        <div class="post__text">${obj.content}</div>
+        <div class="post__image">
+            <img src="${obj.author.image}" alt="">
+        </div>
+        <div class="post__footer">
+            <div class="likes js-likes">
+                <div class="likes__cta">
+                    <a class="like-button  js-like-button" href="#" data-postid="${obj.id}">
+                        <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                        <span class="like-button__label">Mi Piace</span>
+                    </a>
+                </div>
+                <div class="likes__counter">
+                    Piace a <b id="like-counter-1" class="js-likes-counter">${obj.likes}</b> persone
+                </div>
+            </div> 
+        </div>            
+    </div>`
+
+    return postMarkup;
+
+}
